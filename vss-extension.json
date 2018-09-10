@@ -1,0 +1,64 @@
+{
+    "manifestVersion": 1,
+    "id": "parrainc-nuget-creator",
+    "publisher": "Carlos Parra",
+    "version": "0.1.0",
+    "name": "NuGet Package Creator",
+    "description": "Create a nuget package without having to write any line of code.",
+    "public": false,
+    "categories": ["Build and release"],
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/parrainc/vsts-nuget-pack-create"
+    },
+    "contributions": [
+        {
+            "id": "nuget-package-creator",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "NuGetPackCreator"
+            }
+        }
+    ],
+    "content": {
+        "details": {
+            "path": "README.md"
+        },
+        "license": {
+            "path": "LICENSE"
+        }
+    },
+    "tags": [
+        "nuget", 
+        "packaging",
+        "package management"    
+    ],
+    "files": [
+        {
+            "path": "NuGetPackCreator/",
+            "addressable": true
+        }
+    ],
+    "icons": {
+        "default": "images/extension-icon.png"
+    },
+    "links": {
+        "home": {
+            "uri": "mywebsiteurl.here"
+        },
+        "repository": {
+            "uri": "https://github.com/parrainc/vsts-nuget-pack-create"
+        },
+        "issues": {
+            "uri": "https://github.com/parrainc/vsts-nuget-pack-create/issues"
+        }
+    }
+}

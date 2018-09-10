@@ -24,7 +24,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "NuGetPackCreator"
+                "name": "tasks"
             }
         }
     ],
@@ -43,7 +43,7 @@
     ],
     "files": [
         {
-            "path": "NuGetPackCreator/",
+            "path": "tasks/",
             "addressable": true
         }
     ],

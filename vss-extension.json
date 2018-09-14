@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
     "id": "parrainc-nuget-creator",
-    "publisher": "Carlos Parra",
+    "publisher": "carlosparra",
     "version": "0.1.0",
     "name": "NuGet Package Creator",
     "description": "Create a nuget package without having to write any line of code.",

@@ -18,6 +18,13 @@
   },
   "minimumAgentVersion": "1.95.0",
   "instanceNameFormat": "NuGetPackCreator $(message)",
+  "groups": [
+    {
+        "name": "advanced",
+        "displayName": "Advanced",
+        "isExpanded": false
+    }
+  ],
   "inputs": [
     {
       "name": "cwd",

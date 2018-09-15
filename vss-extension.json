@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "parrainc-nuget-creator",
     "publisher": "carlosparra",
-    "version": "0.1.0",
+    "version": "0.1.5",
     "name": "NuGet Package Creator",
     "description": "Create a nuget package without having to write any line of code.",
     "public": false,
@@ -43,7 +43,7 @@
     ],
     "files": [
         {
-            "path": "tasks/",
+            "path": "tasks",
             "addressable": true
         }
     ],

@@ -14,7 +14,7 @@
   "version": {
     "Major": "0",
     "Minor": "1",
-    "Patch": "0"
+    "Patch": "5"
   },
   "minimumAgentVersion": "1.95.0",
   "instanceNameFormat": "NuGetPackCreator $(sourceFilesPath)",
@@ -27,7 +27,7 @@
     {
       "name": "pack-options",
       "displayName": "Packaging Options",
-      "isExpanded": true
+      "isExpanded": false
   }
   ],
   "inputs": [
@@ -36,7 +36,7 @@
       "type": "pickList",
       "label": "Source",
       "defaultValue": "nuspec",
-      "helpMarkDown": "The Source where the NuGet package will be created from.",
+      "helpMarkDown": "The source file where the NuGet package will be created from.",
       "required": true,
       "properties": {
           "EditableOptions": "False"
@@ -61,12 +61,26 @@
       "aliases": ["overrideNuspecTags"],
       "type": "radio",
       "label": "Want to override tags from nuspec file?",
-      "defaultValue": "select",
+      "defaultValue": "negative",
       "helpMarkDown": "Missing...",
       "required": false,
       "options": {
           "positive": "Yes",
           "negative": "No"
+      },
+      "visibleRule": "source = nuspec"
+    },
+    {
+      "name": "tagsToOverride",
+      "type": "multiLine",
+      "label": "Override nuspec tags",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Override tags values in nuspec file. For example: `-author value1 -description value2`. Note: Use only if you need to change nuspec values during creation time.",
+      "properties": {
+          "rows": "3",
+          "resizable": "true",
+          "editorExtension": "ms.vss-services-azure.parameters-grid"
       }
     },
 
@@ -74,11 +88,32 @@
       "name": "assemblyPath",
       "aliases": ["pathToAssemblies"],
       "type": "filePath",
-      "label": "Path to assemblies files you want to pack in the NuGet package",
+      "label": "Path to assembly files",
       "defaultValue": "**/*.dll",
-      "helpMarkDown": "The path to the assemblies files to be included in the package. You can separate multiple files with a semicolon. To omit a .csproj or .nuspec file, just prefix it with '!'. Example: $/dev/package/first.nuspec;!$/dev/package/first.nuspec",
+      "helpMarkDown": "The path to the assembly files to be packed in the NuGet package. You can separate multiple assemblies with a semicolon ';'. To omit a .dll, just prefix it with '!'. Example: $/dev/package/first.dll;!$/dev/package/second.dll",
       "required": true,
       "visibleRule": "source = assemblies"
+    },
+
+
+    {
+      "name": "placeholder",
+      "type": "string",
+      "label": "This is a placeholder",
+      "defaultValue": "",
+      "helpMarkDown": "Empty for now",
+      "required": false,
+      "groupName": "pack-options"
+    },
+
+
+    {
+      "name": "testBoolean",
+      "type": "boolean",
+      "label": "Publish results",
+      "defaultValue": "false",
+      "groupName": "advanced",
+      "helpMarkDown": "This is a boolean placeholder."
     }
   ],
   "execution": {

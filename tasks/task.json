@@ -4,7 +4,7 @@
   "friendlyName": "Nuget Package Creator",
   "description": "Create a nuget package without having to write any line of code.",
   "author": "Carlos Parra",
-  "helpMarkDown": "Replace with markdown to show in help",
+  "helpMarkDown": "[More Information](https://github.com/parrainc)",
   "category": "Utility",
   "visibility": [
     "Build",
@@ -17,39 +17,75 @@
     "Patch": "0"
   },
   "minimumAgentVersion": "1.95.0",
-  "instanceNameFormat": "NuGetPackCreator $(message)",
+  "instanceNameFormat": "NuGetPackCreator $(sourceFilesPath)",
   "groups": [
     {
         "name": "advanced",
         "displayName": "Advanced",
         "isExpanded": false
-    }
+    },
+    {
+      "name": "pack-options",
+      "displayName": "Packaging Options",
+      "isExpanded": true
+  }
   ],
   "inputs": [
     {
-      "name": "cwd",
-      "type": "filePath",
-      "label": "Working Directory",
-      "defaultValue": "",
-      "required": false,
-      "helpMarkDown": "Current working directory when NuGetPackCreator is run."
+      "name": "source",
+      "type": "pickList",
+      "label": "Source",
+      "defaultValue": "nuspec",
+      "helpMarkDown": "The Source where the NuGet package will be created from.",
+      "required": true,
+      "properties": {
+          "EditableOptions": "False"
+      },
+      "options": {
+          "nuspec": "nuspec",
+          "assemblies": "assemblies"
+      }
     },
     {
-      "name": "msg",
-      "type": "string",
-      "label": "Message",
-      "defaultValue": "Hello World",
+      "name": "nuspecPath",
+      "aliases": ["pathToNuspec"],
+      "type": "filePath",
+      "label": "Path to nuspec file",
+      "defaultValue": "",
+      "helpMarkDown": "The path to the nuspec file.",
       "required": true,
-      "helpMarkDown": "Message to echo out"
+      "visibleRule": "source = nuspec"
+    },
+    {
+      "name": "overridetags",
+      "aliases": ["overrideNuspecTags"],
+      "type": "radio",
+      "label": "Want to override tags from nuspec file?",
+      "defaultValue": "select",
+      "helpMarkDown": "Missing...",
+      "required": false,
+      "options": {
+          "positive": "Yes",
+          "negative": "No"
+      }
+    },
+
+    {
+      "name": "assemblyPath",
+      "aliases": ["pathToAssemblies"],
+      "type": "filePath",
+      "label": "Path to assemblies files you want to pack in the NuGet package",
+      "defaultValue": "**/*.dll",
+      "helpMarkDown": "The path to the assemblies files to be included in the package. You can separate multiple files with a semicolon. To omit a .csproj or .nuspec file, just prefix it with '!'. Example: $/dev/package/first.nuspec;!$/dev/package/first.nuspec",
+      "required": true,
+      "visibleRule": "source = assemblies"
     }
   ],
   "execution": {
     "Node": {
-      "target": "sample.js",
+      "target": "built/task.js",
+      "workingDirectory": "$(currentDirectory)",
       "argumentFormat": ""
-    },
-    "PowerShell3": {
-      "target": "sample.ps1"
     }
   }
 }

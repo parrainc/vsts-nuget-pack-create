@@ -1,0 +1,20 @@
+{
+  "name": "nugetpackcreator",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Carlos Parra",
+  "license": "MIT",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "util": "^0.10.4",
+    "vsts-task-lib": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^8.10.29",
+    "@types/q": "^1.0.6"
+  }
+}

@@ -11,10 +11,12 @@
   "dependencies": {
     "fs": "0.0.1-security",
     "util": "^0.10.4",
-    "vsts-task-lib": "^2.6.1"
+    "vsts-task-lib": "^2.6.1",
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
     "@types/node": "^8.10.29",
-    "@types/q": "^1.0.6"
+    "@types/q": "^1.0.6",
+    "@types/xml2js": "^0.4.3"
   }
 }

@@ -14,7 +14,7 @@
   "version": {
     "Major": "0",
     "Minor": "1",
-    "Patch": "5"
+    "Patch": "8"
   },
   "minimumAgentVersion": "1.95.0",
   "instanceNameFormat": "NuGetPackCreator $(sourceFilesPath)",
@@ -36,7 +36,7 @@
       "type": "pickList",
       "label": "Source",
       "defaultValue": "nuspec",
-      "helpMarkDown": "The source file where the NuGet package will be created from.",
+      "helpMarkDown": "The source where the NuGet package will be created from.",
       "required": true,
       "properties": {
           "EditableOptions": "False"
@@ -50,9 +50,9 @@
       "name": "nuspecPath",
       "aliases": ["pathToNuspec"],
       "type": "filePath",
-      "label": "Path to nuspec file",
+      "label": "Path to .nuspec file & .dll's",
       "defaultValue": "",
-      "helpMarkDown": "The path to the nuspec file.",
+      "helpMarkDown": "The path of the directory where the .nuspec and .dll's files are located.",
       "required": true,
       "visibleRule": "source = nuspec"
     },
@@ -61,12 +61,12 @@
       "aliases": ["overrideNuspecTags"],
       "type": "radio",
       "label": "Want to override tags from nuspec file?",
-      "defaultValue": "negative",
+      "defaultValue": "no",
       "helpMarkDown": "Missing...",
       "required": false,
       "options": {
-          "positive": "Yes",
-          "negative": "No"
+          "yes": "Yes",
+          "no": "No"
       },
       "visibleRule": "source = nuspec"
     },
@@ -76,12 +76,13 @@
       "label": "Override nuspec tags",
       "defaultValue": "",
       "required": false,
-      "helpMarkDown": "Override tags values in nuspec file. For example: `-author value1 -description value2`. Note: Use only if you need to change nuspec values during creation time.",
+      "helpMarkDown": "Override tags values in nuspec file. For example: `-author \"value1\" -description \"value2\"`. Note: Use only if you need to change nuspec values during creation time.",
       "properties": {
           "rows": "3",
-          "resizable": "true",
+          "resizable": true,
           "editorExtension": "ms.vss-services-azure.parameters-grid"
-      }
+      },
+      "visibleRule": "overridetags = yes"
     },
 
     {

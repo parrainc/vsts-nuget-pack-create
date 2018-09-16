@@ -1,4 +1,3 @@
-//Grab the vsts task library helpers
 import tl = require('vsts-task-lib/task');
 import trm = require('vsts-task-lib/toolrunner');
 import { isNullOrUndefined } from 'util';
@@ -115,7 +114,8 @@ function overrideNuspecNodes(nuspecPath: string, tagsToOverride: string) {
             tl.debug("Modified .nuspec file: " + newXml);
         });
 
-        // fs.writeFileSync('newfile.nuspec', newXml);
+        fs.writeFileSync(nuspecPath, newXml, 'utf-8');
+
     } catch (error) {
         tl.error(error);
     }

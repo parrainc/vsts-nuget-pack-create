@@ -22,6 +22,36 @@ async function run() {
         let boolph: boolean = tl.getBoolInput('testBoolean');
 
         //make sure required parameters aren't null
+        if (source == "nuspec") {
+            if(isNullOrUndefined(nuspecPath)) {
+                tl.error("nuspecPath cannot be null or undefined");
+                throw new Error("[!] Missing required input: sourcePath");
+
+            } else {
+                if (!isValidFileExtension(nuspecPath, nuspecExt)) {
+                    tl.error("File extension is invalid");
+                    throw new Error("[!] Error, file extension is invalid.");
+
+                }
+            }
+        } else if (source == "assemblies") {
+            
+            if(isNullOrUndefined(assemblyPath)) {
+                tl.error("AssemblyPath cannot be null or undefined");
+                throw new Error("[!] Missing required input: assemblyPath");
+
+            } else {
+                
+                if (!isValidFileExtension(assemblyPath, assemblyExt)) {
+                    tl.error("File extension is invalid");
+                    throw new Error("[!] Error, file extension is invalid.");
+                }
+            }
+        } else {
+            tl.error("unknown source");
+            throw new Error(`[!] Selected source is invalid: ${source}`);
+        }
+
         if (overrideTags == "yes") {
             tl.debug("Override Tags = " + overrideTags);
             
@@ -37,6 +67,10 @@ async function run() {
     } catch (error) {
         tl.setResult(tl.TaskResult.Failed, error.message);
     }
+}
+
+function isValidFileExtension(filePath: string, fileExtension: string) : boolean {
+    return filePath.endsWith(fileExtension);
 }
 
 run();

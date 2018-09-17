@@ -14,7 +14,7 @@
   "version": {
     "Major": "0",
     "Minor": "1",
-    "Patch": "8"
+    "Patch": "9"
   },
   "minimumAgentVersion": "1.95.0",
   "instanceNameFormat": "NuGetPackCreator $(sourceFilesPath)",
@@ -95,6 +95,15 @@
       "required": true,
       "visibleRule": "source = assemblies"
     },
+    {
+      "name": "outputDir",
+      "aliases": ["packageFolder"],
+      "type": "filePath",
+      "label": "Package folder",
+      "defaultValue": "",
+      "helpMarkDown": "Folder where package will be created.",
+      "required": true
+    },
 
 
     {
@@ -123,5 +132,25 @@
       "workingDirectory": "$(currentDirectory)",
       "argumentFormat": ""
     }
+  },
+  "messages": {
+    "Error_NotAValidSource": "[#] Selected source '%s' is invalid.",
+    "Error_NotAValidFilePath": "[#] %s field cannot be null or undefined.",
+    "Error_NotAValidValueForInput": "[#] Value for field '%s' is invalid. Current value is: %s.",
+    "Error_NotAValidFileExtension": "[#] File extension is invalid.",
+    "Error_FileNotFoundException": "[#] Could not find file at location: %s",
+    
+    "Warning_UnexpectedFileExtension": "[*] Expecting file with extension '%s'.",
+    "Warning_NodeToOverrideDoesntExistsInNuspec": "[*] Node %s does not exists in nuspec file. Omitting it...",
+    "Warning_ConfigurationFileNotFound":"[*] No configuration file matching %s was found.",
+
+    "Info_NewValueForNode": "[!] New value for node %s: %s.",
+    "Info_OldValueForNode": "[!] Old value for node %s: %s.",
+    "Info_UpdatedNuspecContent": "[!] Updated .nuspec file content: %s",
+    "Info_TagsOverrideDone": "[!] Tags overwritten successfully.",
+    "Info_TaskCompletedSuccessfully": "[!] Task Completed Successfully!",
+    "Info_OverridingTags": "[!] Starting overriding nuspec tags...",
+    "Info_TagsToOverride": "[!] Tags to override %s.",
+    "Info_OriginalNuspecContent": "[!] Original .nuspec file content: %s"
   }
 }

@@ -9,14 +9,14 @@ export async function packFromAssemblies() : Promise<void> {
         let assemblyPath: string = tl.getPathInput('assemblyPath');
     
         if(isNullOrUndefined(assemblyPath)) {
-            tl.error("AssemblyPath cannot be null or undefined");
-            throw new Error("[!] Missing required input: assemblyPath");
+            tl.error(tl.loc("Error_NotAValidFilePath", "assemblyPath"));
+            throw new Error(tl.loc("Error_NotAValidValueForInput", "assemblyPath", assemblyPath));
 
         } else {
             
             if (!isValidFileExtension(assemblyPath, assemblyExt)) {
-                tl.error("File extension is invalid");
-                throw new Error("[!] Error, file extension is invalid.");
+                tl.error(tl.loc("Error_NotAValidFileExtension"));
+                throw new Error(tl.loc("Warning_UnexpectedFileExtension", assemblyExt));
             }
         }
 

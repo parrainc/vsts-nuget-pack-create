@@ -10,6 +10,7 @@ async function run() {
         
         //Get variables
         let source: string = tl.getInput('source');
+        let outputDir: string = tl.getInput('outputDir');
         let strph: string = tl.getInput('placeholder');
         let boolph: boolean = tl.getBoolInput('testBoolean');
 
@@ -24,11 +25,12 @@ async function run() {
                 break;
             default:
                 tl.error("unknown source");
-                tl.setResult(tl.TaskResult.Failed, `[!] Selected source is invalid: ${source}`);
+                tl.setResult(tl.TaskResult.Failed, tl.loc("Error_NotAValidSource", source));
+                
                 break;
         }
         
-        console.log("Task Done!");
+        console.log(tl.loc("Info_TaskCompletedSuccessfully"));
     } catch (error) {
         tl.error(error);
         tl.setResult(tl.TaskResult.Failed, error.message);

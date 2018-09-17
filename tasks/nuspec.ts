@@ -12,13 +12,13 @@ export async function packFromNuspec() : Promise<void> {
         let tagsToOverride: string = tl.getInput('tagsToOverride');
 
         if(isNullOrUndefined(nuspecPath)) {
-            tl.error("nuspecPath cannot be null or undefined");
-            throw new Error("[!] Missing required input: sourcePath");
+            tl.error(tl.loc("Error_NotAValidFilePath", "nuspec"));
+            throw new Error(tl.loc("Error_NotAValidValueForInput", "nuspecPath", nuspecPath));
 
         } else {
             if (!isValidFileExtension(nuspecPath, nuspecExt)) {
-                tl.error("File extension is invalid");
-                throw new Error("[!] Error, file extension is invalid.");
+                tl.error(tl.loc("Error_NotAValidFileExtension"));
+                throw new Error(tl.loc("Warning_UnexpectedFileExtension", nuspecExt));
 
             }
         }

@@ -5,7 +5,8 @@ import * as xml2js from 'xml2js';
 export function overrideNuspecNodes(nuspecPath: string, tagsToOverride: string) {
     console.log("Overriding tags in nuspec file");
     
-    tl.debug("Overriding nuspec tags");
+    tl.debug(tl.loc("Info_OverridingTags"));
+    tl.debug(tl.loc("Info_TagsToOverride", tagsToOverride));
     
     let nodesValues = 
     {
@@ -19,43 +20,44 @@ export function overrideNuspecNodes(nuspecPath: string, tagsToOverride: string) 
         let newXml: string;
         let nuspecFile: string = readNuspecFile(nuspecPath);
 
+        tl.debug(tl.loc("Info_OriginalNuspecContent", nuspecFile));
+
         parser.parseString(nuspecFile, function (err, result) {
             if (err) console.log(err);
 
-            tl.debug("Original .nuspec file: " + result);
-            
             let json = result;
 
             Object.keys(nodesValues).forEach(key => {
                 let hasProperty: boolean = json.package.metadata[0].hasOwnProperty(key);
-                console.log(key);
-                console.log(hasProperty);
-                
-                tl.debug(`Old value for ${key}: ` + json.package.metadata[0][key]);
 
                 if (hasProperty) {
-                    json.package.metadata[0][key] = nodesValues[key];
-                } else {
-                    // create property
-                    tl.warning(`Property ${key} doesn't exists in file!`);
-                }
+                    tl.debug(tl.loc("Info_OldValueForNode", key, json.package.metadata[0][key]));
 
-                tl.debug(`New value for ${key}: ` + json.package.metadata[0][key]);
+                    json.package.metadata[0][key] = nodesValues[key];
+
+                    tl.debug(tl.loc("Info_NewValueForNode", key ,json.package.metadata[0][key]));
+                } else {
+                    // create property if user decide so
+                    tl.warning(tl.loc("Warning_NodeToOverrideDoesntExistsInNuspec", key));
+                }
             });
 
             newXml = builder.buildObject(json);
             
-            tl.debug("Modified .nuspec file: " + newXml);
+            tl.debug(tl.loc("Info_UpdatedNuspecContent", newXml));
         });
 
         fs.writeFileSync(nuspecPath, newXml, 'utf-8');
+        // to be included here
+        // tl.debug(tl.loc("Info_UpdatedNuspecContent", newXml));
 
     } catch (error) {
         tl.error(error);
+        tl.setResult(tl.TaskResult.Failed, error.message);
     }
 
-    tl.debug("Overriding tags done!");
-    console.log("Overriding tags done!");
+    tl.debug(tl.loc("Info_TagsOverrideDone"));
+    console.log(tl.loc("Info_TagsOverrideDone"));
 }
 
 export function readNuspecFile(nuspecPath: string) : string {
